@@ -11,4 +11,5 @@ return [
     'Signup' => '注册',
     'Login' => '登录',
     'Create New Post' => '',
+    'Logout ({name})' => '',
 ];

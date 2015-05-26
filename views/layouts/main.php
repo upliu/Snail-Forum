@@ -45,7 +45,7 @@ AppAsset::register($this);
                     'label' => Yii::t('app/main', 'Create New Post'),
                 ];
                 $menuItems[] = [
-                    'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                    'label' => Yii::t('app/main', 'Logout ({name})', ['name' => Yii::$app->user->identity->username]),
                     'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post']
                 ];
