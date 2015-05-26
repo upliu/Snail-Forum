@@ -48,5 +48,5 @@ crashlytics.properties
 crashlytics-build.properties
 
 runtime
-web/assets
+assets
 
