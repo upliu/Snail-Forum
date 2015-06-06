@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers;
 
+use app\models\Board;
 use Yii;
 use app\models\LoginForm;
 use app\models\PasswordResetRequestForm;
@@ -26,10 +27,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['login', 'logout', 'signup'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
+                        'actions' => ['login', 'signup'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -67,6 +68,9 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        $forum = new Board();
+        $forum->save();
+        var_dump($forum->errors);
         return $this->render('index');
     }
 

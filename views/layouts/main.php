@@ -26,7 +26,7 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'My Company',
+                'brandLabel' => 'Snail-Forum',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
                     'class' => 'navbar-inverse navbar-fixed-top',
@@ -34,16 +34,14 @@ AppAsset::register($this);
             ]);
 
             $menuItems = [
-                ['label' => Yii::t('app/main', 'Home'), 'url' => ['/site/index']],
+                ['label' => Yii::t('app/main', 'Forum'), 'url' => ['/topic/index']],
+                ['label' => Yii::t('app/main', 'Board'), 'url' => ['/board/index']],
             ];
 
             if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-                $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+                $menuItems[] = ['label' => Yii::t('app/main', 'Signup'), 'url' => ['/site/signup']];
+                $menuItems[] = ['label' => Yii::t('app/main', 'Login'), 'url' => ['/site/login']];
             } else {
-                $menuItems[] = [
-                    'label' => Yii::t('app/main', 'Create New Post'),
-                ];
                 $menuItems[] = [
                     'label' => Yii::t('app/main', 'Logout ({name})', ['name' => Yii::$app->user->identity->username]),
                     'url' => ['/site/logout'],
@@ -59,17 +57,76 @@ AppAsset::register($this);
         ?>
 
         <div class="container">
-            <?= Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]) ?>
-            <?= $content ?>
+            <div class="row">
+
+                <div class="col-lg-9">
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
+                <?= $content ?>
+                </div>
+
+                <div class="col-lg-3">
+
+                    <?= Html::a( '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>' . Yii::t('app/main', 'Create New Topic'), ['/topic/new', 'id' => Yii::$app->session->get('board_id')], ['class' => 'btn btn-primary btn-block']) ?>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><?= Yii::t('app/main', 'User Info') ?></h3>
+                        </div>
+                        <div class="panel-body">
+                            <?php
+                            if (Yii::$app->user->isGuest) {
+                                echo $this->render('/partial/sidebar-login-btn.php');
+                            } else {
+                                echo $this->render('/partial/sidebar-user-info.php');
+                            }
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><?= Yii::t('app/main', 'Information Bar') ?></h3>
+                        </div>
+                        <div class="panel-body">
+                            这里是站点公告
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><?= Yii::t('app/main', 'Forum Statistics') ?></h3>
+                        </div>
+                        <ul class="list-unstyled panel-body">
+                            <li><?= Yii::t('app/main', 'Topics Number: {num}', ['num' => 89]) ?></li>
+                            <li><?= Yii::t('app/main', 'Posts Number: {num}', ['num' => 239]) ?></li>
+                            <li><?= Yii::t('app/main', 'Users Number: {num}', ['num' => 723]) ?></li>
+                        </ul>
+                    </div>
+
+                    <div class="panel panel-default snail-friend-links">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><?= Yii::t('app/main', 'Links') ?></h3>
+                        </div>
+                        <div class="panel-body">
+                            <?php $links = ['//www.baidu.com/'=>'百度','//www.qq.com'=>'腾讯']; ?>
+                            <?php foreach ($links as $link => $title) {
+                                echo Html::a($title, $link, ['target' => '_blank']);
+                            }
+                            ?>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 
     <footer class="footer">
         <div class="container">
-            <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-            <p class="pull-right"><?= Yii::powered() ?></p>
+            <p class="pull-left">&copy; Snail-Forum <?= date('Y') ?></p>
+            <p class="pull-right">Powered by <a href="//snail-forum.upliu.net" target="_blank">Snail-Forum</a></p>
         </div>
     </footer>
 

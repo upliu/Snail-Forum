@@ -8,6 +8,7 @@ $config = [
 //    'language' => 'en-US',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'defaultRoute' => 'topic',
     'components' => [
         'urlManager' => [
             'enablePrettyUrl' => true,
