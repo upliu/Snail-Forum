@@ -10,6 +10,20 @@ $config = [
     'bootstrap' => ['log'],
     'defaultRoute' => 'topic',
     'components' => [
+        'view' => [
+            'on endBody' => function($event) {
+                /* @var $event yii\base\Event */
+                /* @var $view yii\web\View */
+                $view = $event->sender;
+                $baseUrl = \Yii::$app->request->getBaseUrl();
+                $js = <<<DOT
+var Snail = window.Snail || {};
+Snail.baseUrl = '$baseUrl';
+DOT;
+
+                $view->registerJs($js, \yii\web\View::POS_HEAD);
+            },
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,

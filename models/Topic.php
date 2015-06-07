@@ -51,7 +51,7 @@ class Topic extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['board_id', 'title', 'content', 'created_at', 'author_id'], 'required'],
+            [['board_id', 'title', 'content', 'author_id'], 'required'],
             [['board_id', 'created_at', 'updated_at', 'is_top', 'is_deleted', 'is_locked', 'author_id', 'last_post_time', 'last_post_user_id', 'count_view', 'count_post'], 'integer'],
             [['content'], 'string'],
             [['title'], 'string', 'max' => 50],

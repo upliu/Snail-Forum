@@ -17,7 +17,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title><?= Html::encode($this->title . ' - ' . Yii::$app->params['config']['site_name']) ?></title>
     <?php $this->head() ?>
 </head>
 <body>
@@ -29,7 +29,7 @@ AppAsset::register($this);
                 'brandLabel' => 'Snail-Forum',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
+                    'class' => 'navbar-inverse',
                 ],
             ]);
 
@@ -68,7 +68,7 @@ AppAsset::register($this);
 
                 <div class="col-lg-3">
 
-                    <?= Html::a( '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>' . Yii::t('app/main', 'Create New Topic'), ['/topic/new', 'id' => Yii::$app->session->get('board_id')], ['class' => 'btn btn-primary btn-block']) ?>
+                    <?= Html::a( '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>' . Yii::t('app/main', 'Create New Topic'), ['/topic/new', 'bid' => Yii::$app->session->get('board_id')], ['class' => 'btn btn-primary btn-block']) ?>
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -125,7 +125,7 @@ AppAsset::register($this);
 
     <footer class="footer">
         <div class="container">
-            <p class="pull-left">&copy; Snail-Forum <?= date('Y') ?></p>
+            <p class="pull-left">&copy; <?= Yii::$app->params['config']['site_name'] ?> <?= date('Y') ?></p>
             <p class="pull-right">Powered by <a href="//snail-forum.upliu.net" target="_blank">Snail-Forum</a></p>
         </div>
     </footer>

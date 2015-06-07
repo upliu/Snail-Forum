@@ -3,13 +3,10 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
+/* @var $board app\models\Board */
 $this->title = 'My Yii Application';
 
-
-foreach ($parent_names as $p) {
-    $this->params['breadcrumbs'][] = ['label' => $p['name'], 'url' => ['board/view', 'id' => $p['id']]];
-}
-$this->params['breadcrumbs'][] = ['label' => $board->name, 'url' => ['board/view', 'id' => $board->id]];
+$this->params['breadcrumbs'] = $board->genBreadcrumbs();
 ?>
 
 <div class="board-view">

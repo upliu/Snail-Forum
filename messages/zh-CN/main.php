@@ -26,4 +26,5 @@ return [
     'Title' => '标题',
     'Content' => '内容',
     'Submit' => '提交',
+    'The topic does not exist' => '帖子不存在',
 ];

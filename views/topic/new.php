@@ -5,11 +5,13 @@ use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Topic */
+/* @var $board app\models\Board */
 
 $this->registerJsFile('@web/tinymce/tinymce.min.js', ['depends' => 'yii\web\JqueryAsset']);
 
 $this->title = Yii::t('app/main', 'Create New Topic');
 
+$this->params['breadcrumbs'] = $board->genBreadcrumbs();
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

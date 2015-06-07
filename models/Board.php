@@ -112,4 +112,16 @@ class Board extends \yii\db\ActiveRecord
     {
 
     }
+
+    public function genBreadcrumbs()
+    {
+        $breadcrumbs[] = ['label' => Yii::t('app/main', 'Board'), 'url' => '/board/index'];
+        $parent_names = $this->getParentNames();
+        foreach ($parent_names as $p) {
+            $breadcrumbs[] = ['label' => $p['name'], 'url' => ['board/view', 'id' => $p['id']]];
+        }
+        $breadcrumbs[] = ['label' => $this->name, 'url' => ['board/view', 'id' => $this->id]];
+
+        return $breadcrumbs;
+    }
 }

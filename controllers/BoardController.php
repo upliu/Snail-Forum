@@ -23,12 +23,6 @@ class BoardController extends Controller
         ];
     }
 
-    public function init()
-    {
-        parent::init();
-        $this->view->params['breadcrumbs'][] = ['label' => Yii::t('app/main', 'Board'), 'url' => '/board/index'];
-    }
-
     public function actionIndex()
     {
         $root_boards = Board::findRootBoards();
@@ -46,10 +40,9 @@ class BoardController extends Controller
         }
 
         $sub_boards = Board::findSubBoards($board->id);
-        $parent_names = $board->getParentNames();
 
         \Yii::$app->session->set('board_id', $id);
-        return $this->render('view', compact('sub_boards', 'board', 'parent_names'));
+        return $this->render('view', compact('sub_boards', 'board'));
     }
 
 }
