@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 
 /**
  * This is the model class for table "{{%topic}}".
@@ -82,5 +84,25 @@ class Topic extends \yii\db\ActiveRecord
             'count_view' => 'Count View',
             'count_post' => 'Count Post',
         ];
+    }
+
+    public static function getList($board_id = null, $sort_by = 'created_at', $pagination = null)
+    {
+        if (!in_array($sort_by, ['created_at', 'count_view', 'count_post'])) {
+            return [];
+        }
+
+        $query = static::find();
+        $query->orderBy($sort_by)
+            ->andFilterWhere([
+                'board_id' => $board_id,
+            ]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => $pagination ?: (new Pagination())
+        ]);
+
+        return $dataProvider;
     }
 }

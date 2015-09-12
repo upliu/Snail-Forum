@@ -7,6 +7,8 @@ use app\models\Topic;
 use yii\web\Controller;
 use app\models\Board;
 use yii\web\NotFoundHttpException;
+use app\models\Post;
+use yii\data\ActiveDataProvider;
 
 class TopicController extends Controller
 {
@@ -64,9 +66,19 @@ class TopicController extends Controller
         ]);
     }
 
-    public function actionAjaxPost($topic_id)
+    public function actionAjaxPost($tid, $page = 1)
     {
+        $topic_id = $tid;
+        $query = Post::find()->where([
+            'topic_id' => $topic_id,
+            'pid' => 0,
+        ]);
 
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->renderPartial('ajax-post', compact('dataProvider'));
     }
 
 }

@@ -105,7 +105,11 @@ class Board extends \yii\db\ActiveRecord
      */
     public function decodePath()
     {
-        return Json::decode($this->path);
+        try {
+            return Json::decode($this->path);
+        } catch (\Exception $e) {
+            return [];
+        }
     }
 
     public function setPid($pid)

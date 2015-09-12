@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers;
 
+use app\models\Topic;
 use Yii;
 use app\helpers\ArrayHelper;
 use app\models\Board;
@@ -38,11 +39,13 @@ class BoardController extends Controller
         if (!$board) {
             throw new NotFoundHttpException(Yii::t('app/main', 'The board does not exist'));
         }
+        \Yii::$app->session->set('board_id', $id);
 
         $sub_boards = Board::findSubBoards($board->id);
 
-        \Yii::$app->session->set('board_id', $id);
-        return $this->render('view', compact('sub_boards', 'board'));
+        $dataProvider = Topic::getList($id);
+
+        return $this->render('view', compact('sub_boards', 'board', 'dataProvider'));
     }
 
 }

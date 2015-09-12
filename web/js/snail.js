@@ -31,6 +31,12 @@
             }
         },
 
+        loadPost: function(page){
+            var topic_id = $('.topic-view').data('topic_id'),
+                page = page || 1;
+
+        },
+
         bindAsync: function(){
             $('body').on('submit', 'form[rel="async"]', function(e){
                 e.preventDefault();
@@ -61,11 +67,12 @@
             tinymce.init($.extend({
                 selector: "textarea",
                 height: 300,
-                content_css: Snail.baseUrl + '/css/tinymce.css',
+                //content_css: Snail.baseUrl + '/css/tinymce.css',
                 plugins: [
                     "advlist autolink lists link image charmap print preview anchor",
                     "searchreplace visualblocks code fullscreen",
-                    "insertdatetime media table contextmenu paste"
+                    "insertdatetime media table contextmenu paste",
+                    "code image imagetools"
                 ],
                 toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
                 setup: function(editor) {
@@ -85,6 +92,10 @@
 
             if ($('.post-create').length > 0) {
                 Snail.tinymceInit();
+            }
+
+            if ($('.topic-view').length > 0) {
+
             }
         }
 

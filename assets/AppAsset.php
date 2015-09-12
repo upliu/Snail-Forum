@@ -9,6 +9,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/snail.css',
+        'http://wordpress.local.net/wp-includes/css/editor.min.css?ver=4.2.2',
     ];
     public $js = [
         'js/snail.js',

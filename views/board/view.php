@@ -13,10 +13,21 @@ $this->params['breadcrumbs'] = $board->genBreadcrumbs();
 
     <?= $this->render('../partial/board-list', ['board' => $board, 'sub_boards' => $sub_boards]) ?>
 
-    <div class="panel panel-default">
-        <div class="panel-body board-category">
+    <?= \yii\widgets\LinkPager::widget(['pagination' => $dataProvider->pagination]) ?>
 
-        </div>
+    <div class="list-meta">
+        <span class="list-sort">
+            <?= Html::a(Yii::t('app/main', 'Latest Topic'), ['/board/view', 'id' => $board->id, 'sort' => 'postdate']) ?>
+            <?= Html::a(Yii::t('app/main', 'Latest Post'), ['/board/view', 'id' => $board->id]) ?>
+        </span>
     </div>
+    <table class="table table-bordered">
+        <?php foreach ($dataProvider->models as $topic): ?>
+            <tr>
+                <td><?= Html::a($topic->title, ['/topic/view', 'id' => $topic->id]) ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
 
+    <?= \yii\widgets\LinkPager::widget(['pagination' => $dataProvider->pagination]) ?>
 </div>
